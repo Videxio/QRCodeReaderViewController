@@ -55,8 +55,8 @@
 
   // Camera box
 
-  CGFloat cameraWidth  = width * 0.4;
-  CGFloat cameraHeight = cameraWidth * 0.6;
+  CGFloat cameraWidth  = width * 0.4f;
+  CGFloat cameraHeight = cameraWidth * 0.6f;
   CGFloat cameraX      = center - cameraWidth / 2;
   CGFloat cameraY      = middle - cameraHeight / 2;
   CGFloat cameraRadius = cameraWidth / 80;
@@ -65,11 +65,11 @@
 
   // Camera lens
 
-  CGFloat outerLensSize = cameraHeight * 0.8;
+  CGFloat outerLensSize = cameraHeight * 0.8f;
   CGFloat outerLensX    = center - outerLensSize / 2;
   CGFloat outerLensY    = middle - outerLensSize / 2;
 
-  CGFloat innerLensSize = outerLensSize * 0.7;
+  CGFloat innerLensSize = outerLensSize * 0.7f;
   CGFloat innerLensX    = center - innerLensSize / 2;
   CGFloat innerLensY    = middle - innerLensSize / 2;
 
@@ -78,10 +78,10 @@
 
   // Draw flash box
 
-  CGFloat flashBoxWidth      = cameraWidth * 0.8;
-  CGFloat flashBoxHeight     = cameraHeight * 0.17;
-  CGFloat flashBoxDeltaWidth = flashBoxWidth * 0.14;
-  CGFloat flashLeftMostX     = cameraX + (cameraWidth - flashBoxWidth) * 0.5;
+  CGFloat flashBoxWidth      = cameraWidth * 0.8f;
+  CGFloat flashBoxHeight     = cameraHeight * 0.17f;
+  CGFloat flashBoxDeltaWidth = flashBoxWidth * 0.14f;
+  CGFloat flashLeftMostX     = cameraX + (cameraWidth - flashBoxWidth) * 0.5f;
   CGFloat flashBottomMostY   = cameraY;
 
   UIBezierPath *flashPath = [UIBezierPath bezierPath];
@@ -96,15 +96,15 @@
 
   // Arrows
 
-  CGFloat arrowHeadHeigth = cameraHeight * 0.5;
-  CGFloat arrowHeadWidth  = ((width - cameraWidth) / 2) * 0.3;
-  CGFloat arrowTailHeigth = arrowHeadHeigth * 0.6;
-  CGFloat arrowTailWidth  = ((width - cameraWidth) / 2) * 0.7;
+  CGFloat arrowHeadHeigth = cameraHeight * 0.5f;
+  CGFloat arrowHeadWidth  = ((width - cameraWidth) / 2) * 0.3f;
+  CGFloat arrowTailHeigth = arrowHeadHeigth * 0.6f;
+  CGFloat arrowTailWidth  = ((width - cameraWidth) / 2) * 0.7f;
 
   // Draw left arrow
 
-  CGFloat arrowLeftX = center - cameraWidth * 0.2;
-  CGFloat arrowLeftY = middle + cameraHeight * 0.45;
+  CGFloat arrowLeftX = center - cameraWidth * 0.2f;
+  CGFloat arrowLeftY = middle + cameraHeight * 0.45f;
 
   UIBezierPath *leftArrowPath = [UIBezierPath bezierPath];
   [leftArrowPath moveToPoint:CGPointMake(arrowLeftX, arrowLeftY)];
@@ -118,8 +118,8 @@
 
   // Right arrow
 
-  CGFloat arrowRightX = center + cameraWidth * 0.2;
-  CGFloat arrowRightY = middle + cameraHeight * 0.60;
+  CGFloat arrowRightX = center + cameraWidth * 0.2f;
+  CGFloat arrowRightY = middle + cameraHeight * 0.60f;
 
   UIBezierPath *rigthArrowPath = [UIBezierPath bezierPath];
   [rigthArrowPath moveToPoint:CGPointMake(arrowRightX, arrowRightY)];

@@ -59,19 +59,21 @@
   CGFloat lineOffset           = width / 10;
   CGFloat lineOriginFromCenter = circleRadius + lineOffset;
 
+  const CGFloat M_PIf = (CGFloat)M_PI;
+
   //Circle
   UIBezierPath *circlePath = [UIBezierPath bezierPath];
-  [circlePath addArcWithCenter:CGPointMake(centerX, centerY) radius:circleRadius startAngle:0.0 endAngle:M_PI clockwise:YES];
-  [circlePath addArcWithCenter:CGPointMake(centerX, centerY) radius:circleRadius startAngle:M_PI endAngle:M_PI * 2 clockwise:YES];
+  [circlePath addArcWithCenter:CGPointMake(centerX, centerY) radius:circleRadius startAngle:0.0f endAngle:M_PIf clockwise:YES];
+  [circlePath addArcWithCenter:CGPointMake(centerX, centerY) radius:circleRadius startAngle:M_PIf endAngle:M_PIf * 2 clockwise:YES];
 
   // Draw beams
   [paintColor setFill];
   
   for (int i = 0; i < 8; i++) {
-    CGFloat angle = ((2 * M_PI) / 8) * i;
+    float angle = (float)((2 * M_PIf) / 8) * i;
 
-    CGPoint startPoint = CGPointMake(centerX + cos(angle) * lineOriginFromCenter, centerY + sin(angle) * lineOriginFromCenter);
-    CGPoint endPoint   = CGPointMake(centerX + cos(angle) * (lineOriginFromCenter + lineLength), centerY + sin(angle) * (lineOriginFromCenter + lineLength));
+    CGPoint startPoint = CGPointMake(centerX + cosf(angle) * lineOriginFromCenter, centerY + sinf(angle) * lineOriginFromCenter);
+    CGPoint endPoint   = CGPointMake(centerX + cosf(angle) * (lineOriginFromCenter + lineLength), centerY + sinf(angle) * (lineOriginFromCenter + lineLength));
 
     UIBezierPath *beamPath = [self linePathWithStartPoint:startPoint endPoint:endPoint thickness:strokeLineWidth];
     [beamPath stroke];
