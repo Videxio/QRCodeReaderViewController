@@ -261,8 +261,8 @@
       leftLayoutAnchor = self.view.safeAreaLayoutGuide.leftAnchor;
       rightLayoutAnchor = self.view.safeAreaLayoutGuide.rightAnchor;
     } else {
-      topLayoutAnchor = self.topLayoutGuide.topAnchor;
-      bottomLayoutAnchor = self.bottomLayoutGuide.bottomAnchor;
+      topLayoutAnchor = self.view.topAnchor;
+      bottomLayoutAnchor = self.view.bottomAnchor;
       leftLayoutAnchor = self.view.leftAnchor;
       rightLayoutAnchor = self.view.rightAnchor;
     }
