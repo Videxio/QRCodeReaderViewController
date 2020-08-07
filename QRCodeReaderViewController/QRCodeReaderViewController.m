@@ -48,8 +48,6 @@
 - (void)dealloc
 {
   [self stopScanning];
-
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (id)init
@@ -101,8 +99,6 @@
     [self setupAutoLayoutConstraints];
 
     [_cameraView.layer insertSublayer:_codeReader.previewLayer atIndex:0];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 
     __weak __typeof__(self) weakSelf = self;
 
@@ -189,16 +185,34 @@
 
 #pragma mark - Managing the Orientation
 
-- (void)orientationChanged:(NSNotification *)notification
+- (UIInterfaceOrientation)windowOrientation {
+  if (@available(iOS 13.0, *)) {
+    return self.view.window.windowScene.interfaceOrientation;
+  } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [[UIApplication sharedApplication] statusBarOrientation];
+#pragma clang diagnostic pop
+  }
+}
+
+- (void)orientationChanged
 {
   [_cameraView setNeedsDisplay];
 
   if (_codeReader.previewLayer.connection.isVideoOrientationSupported) {
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIInterfaceOrientation orientation = self.windowOrientation;
 
     _codeReader.previewLayer.connection.videoOrientation = [QRCodeReader videoOrientationFromInterfaceOrientation:
                                                             orientation];
   }
+}
+
+// override
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  [self orientationChanged];
 }
 
 #pragma mark - Managing the Block
@@ -220,7 +234,7 @@
   [_codeReader.previewLayer setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 
   if ([_codeReader.previewLayer.connection isVideoOrientationSupported]) {
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIInterfaceOrientation orientation = self.windowOrientation;
 
     _codeReader.previewLayer.connection.videoOrientation = [QRCodeReader videoOrientationFromInterfaceOrientation:orientation];
   }
